@@ -11,6 +11,7 @@ body {
   background: #0A0A0F;
   color: #fff;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 code, pre, .code-text {
@@ -201,24 +202,7 @@ code, pre, .code-text {
   color: #fff;
 }
 
-/* App window */
-.app-window {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  width: 90%;
-  max-width: 900px;
-  max-height: 80vh;
-  background: rgba(10, 10, 15, 0.95);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(0, 245, 255, 0.3);
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-              0 0 40px rgba(0, 245, 255, 0.2);
-  z-index: 100;
-  overflow: hidden;
-  pointer-events: auto;
-}
+/* App window - Removed conflicting styles, now handled in component */
 
 .window-header {
   display: flex;

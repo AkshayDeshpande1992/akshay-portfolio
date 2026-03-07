@@ -45,6 +45,14 @@ const Portfolio = () => {
       const progress = Math.min(scrollY / maxScroll, 1);
       setScrollProgress(progress);
 
+      // If scrolled back up, reset to hero
+      if (scrollY < 100 && zoomed) {
+        setZoomed(false);
+        setShowIcons(false);
+        setActiveApp(null);
+      }
+
+      // Trigger zoom when scroll reaches threshold
       if (progress > 0.5 && !zoomed) {
         setZoomed(true);
         setTimeout(() => setShowIcons(true), 1000);
