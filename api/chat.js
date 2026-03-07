@@ -12,30 +12,9 @@ const client = new Groq({
 export async function POST(req) {
   try {
 
-    // Safely parse request body
-    let body = {};
-    try {
-      body = await req.json();
-    } catch {
-      return Response.json(
-        { error: "Invalid JSON body" },
-        { status: 400 }
-      );
-    }
-
-    const message = body?.message;
-
-    if (!message) {
-      return Response.json(
-        { error: "Message is required" },
-        { status: 400 }
-      );
-    }
-
     return Response.json({
-      data: req},
-      {status: 200}
-    );
+        data: req
+    });
 
   } catch (error) {
 
