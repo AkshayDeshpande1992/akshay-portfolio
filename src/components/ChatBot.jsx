@@ -102,14 +102,14 @@ const ChatBot = () => {
 
       const assistantMessage = {
         role: 'assistant',
-        content: response.data.response
+        content: response.data.content 
       };
 
       setMessages(prev => [...prev, assistantMessage]);
       
       // Speak the response if voice is enabled
       if (voiceEnabled) {
-        speak(response.data.response);
+        speak(response.data.content); 
       }
     } catch (error) {
       console.error('Chat error:', error);

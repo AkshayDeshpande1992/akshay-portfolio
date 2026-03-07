@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+/api/node_modules
+.env
+/api/.env
 
 # testing
 /coverage
