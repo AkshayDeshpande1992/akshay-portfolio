@@ -10,8 +10,10 @@ const AppWindow = ({ title, children, onClose, show }) => {
 
   useEffect(() => {
     if (show) {
-      setPosition({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+      // Always open at top left
+      setPosition({ x: 50, y: 50 });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [show]);
 
   // Drag handlers
