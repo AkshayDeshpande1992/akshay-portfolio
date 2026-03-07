@@ -171,7 +171,7 @@ const Portfolio = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-400/20 rounded-lg" />
                     
                     {/* Code lines animation */}
-                    <div className="relative z-10 space-y-2 code-text text-xs">
+                    <div className="relative z-10 space-y-2 code-text text-md font-mono">
                       {['const developer = {', '  name: "Akshay",', '  role: "Senior Engineer",', '  passion: "Building amazing things"', '};'].map((line, i) => (
                         <motion.div
                           key={i}
