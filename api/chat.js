@@ -1,13 +1,10 @@
 export const runtime = "nodejs";
 
-import Groq from "groq-sdk";
-
-const client = new Groq({
-  apiKey: process.env.GROQ_API_KEY
-});
+import mock from "../src/mock.js";
 
 export async function GET() {
   return Response.json({
-    message: "Groq import works"
+    message: "Mock import works",
+    data: mock
   });
 }
