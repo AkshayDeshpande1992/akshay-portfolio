@@ -53,6 +53,7 @@ const AppWindow = ({ title, children, onClose, show }) => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dragging]);
 
   // Handle ESC key to close window
