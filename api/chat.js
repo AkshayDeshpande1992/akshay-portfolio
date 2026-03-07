@@ -32,23 +32,10 @@ export async function POST(req) {
       );
     }
 
-    const response = await client.chat.completions.create({
-      model: "llama-3.1-8b-instant",
-      messages: [
-        {
-          role: "system",
-          content: `You are Akshay's portfolio assistant. Use this context: ${portfolioContext}`
-        },
-        {
-          role: "user",
-          content: message
-        }
-      ]
-    });
-
     return Response.json({
-      data: "Call completed"
-    });
+      data: req},
+      {status: 200}
+    );
 
   } catch (error) {
 
