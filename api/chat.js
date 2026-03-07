@@ -1,15 +1,17 @@
 import Groq from "groq-sdk";
 import { portfolioContext } from "../src/mock.js";
 
-export default async function handler(req, res) {
+function formatChatHistory(chatHistory) {
+  return Array.isArray(chatHistory)
+    ? chatHistory.filter(h => h.role && h.content).map(h => ({ role: h.role, content: h.content }))
+    : [];
+}
 
-  if (req.method !== "POST") {
-    return res.status(200).json({ message: "API working" });
-  }
+export default async function handler(req, res) {
 
   try {
 
-    const { message } = req.body || {};
+    const { message, chatHistory } = req.body;
 
     if (!message) {
       return res.status(400).json({ error: "Message required" });
@@ -24,18 +26,15 @@ export default async function handler(req, res) {
       messages: [
         {
           role: "system",
-          content: `You are Akshay's portfolio assistant. Use this context: ${portfolioContext}`
+          content: `You are Akshay's portfolio assistant. Use this context for all answers: ${portfolioContext}`
         },
-        {
-          role: "user",
-          content: message
-        }
-      ]
+        ...formatChatHistory(chatHistory),
+        { role: "user", content: message }
+      ],
+      temperature: 0.7
     });
 
-    return res.status(200).json({
-      data: response.choices[0].message.content
-    });
+    return res.status(200).json({ content: response.choices[0].message.content });
 
   } catch (error) {
 
