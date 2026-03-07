@@ -1,11 +1,13 @@
 export const runtime = "nodejs";
 
+import Groq from "groq-sdk";
+
+const client = new Groq({
+  apiKey: process.env.GROQ_API_KEY
+});
+
 export async function GET() {
-  return new Response(
-    JSON.stringify({ message: "API is working" }),
-    {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
-    }
-  );
+  return Response.json({
+    message: "Groq import works"
+  });
 }
