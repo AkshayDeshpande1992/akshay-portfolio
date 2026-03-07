@@ -47,7 +47,7 @@ export async function POST(req) {
     });
 
     return Response.json({
-      data: response.choices[0].message.content
+      data: "Call completed"
     });
 
   } catch (error) {
