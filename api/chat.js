@@ -12,8 +12,8 @@ const client = new Groq({
 export async function POST(req) {
   try {
 
-    return Response.json({
-        data: req
+     return Response.json({
+      message: "POST works"
     });
 
   } catch (error) {
