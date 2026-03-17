@@ -4,43 +4,64 @@ export const personalInfo = {
   name: "Akshay Deshpande",
   title: "Senior Software Engineer",
   tagline: "AI Systems • Cloud Architecture • Full Stack Development",
-  email: "akshay@example.com",
-  github: "https://github.com/akshaydeshpande",
-  linkedin: "https://linkedin.com/in/akshaydeshpande"
+  email: "deakshay50@gmail.com",
+  github: "https://github.com/AkshayDeshpande1992",
+  linkedin: "https://linkedin.com/in/akshay-deshpande-a3a999b5"
 };
 
 export const techStack = [
   { name: "Azure", category: "Cloud" },
+  { name: "AWS", category: "Cloud" },
   { name: "OpenAI", category: "AI" },
   { name: "Angular", category: "Frontend" },
   { name: "React", category: "Frontend" },
+  { name: "Jquery", category: "Frontend" },
+  { name: "Javascript", category: "Frontend" },
   { name: "Node.js", category: "Backend" },
-  { name: ".NET", category: "Backend" },
+  { name: ".NET Web API/Core", category: "Backend" },
   { name: "MongoDB", category: "Database" },
-  { name: "Docker", category: "DevOps" }
+  { name: "SQL Server", category: "Database" },
+  { name: "Docker", category: "DevOps" },
+  { name: "Kubernetes", category: "DevOps" },
+  { name: "Jenkins", category: "Source Control" },
+  { name: "Azure TFS", category: "Source Control" }
 ];
 
 export const experience = [
   {
     id: 1,
-    year: "2020 - Present",
+    year: "2021 - Present",
     title: "Senior Software Engineer",
-    company: "Tech Corp",
-    description: "Leading AI systems development and cloud architecture initiatives"
+    company: "CSC Global",
+    description: "Leading development of AI-driven systems using Azure-hosted GPT models, MCP servers, and agent orchestration. Architecting scalable solutions with RAG, Docker, Kubernetes, and ASP.NET Core"
   },
   {
     id: 2,
-    year: "2018 - 2020",
-    title: "Full Stack Engineer",
-    company: "Innovation Labs",
-    description: "Developed scalable web applications using modern tech stack"
+    year: "2018 - 2021",
+    title: "Senior Software Engineer",
+    company: "Accenture",
+    description: "Built scalable web applications using AWS, ASP.NET Core, and Angular. Led a team of 4 developers and implemented automation testing solutions as well using Selenium."
   },
   {
     id: 3,
-    year: "2016 - 2018",
+    year: "2017 - 2018",
+    title: "Senior Software Engineer",
+    company: "eClerx Services",
+    description: "Developed and maintained enterprise applications using ASP.NET Web APIs, SQL, and AngularJS."
+  },
+  {
+    id: 4,
+    year: "2016 - 2017",
     title: "Software Developer",
-    company: "StartUp Inc",
-    description: "Built and maintained enterprise applications"
+    company: "GEP Worldwide",
+    description: "Developed enterprise applications and gained hands-on experience with Azure cloud services using ASP.NET Web APIs, MVC, jQuery, and SQL."
+  },
+  {
+    id: 5,
+    year: "2014 - 2016",
+    title: "Software Developer",
+    company: "National Bulk Handling Corporation Pvt Ltd",
+    description: "Built and maintained enterprise-grade applications using ASP.NET, MVC, SQL, and jQuery, establishing a strong foundation in software development."
   }
 ];
 
@@ -48,9 +69,9 @@ export const projects = [
   {
     id: 1,
     title: "Azure AI Chatbot",
-    description: "Intelligent chatbot using Azure Cognitive Services and OpenAI GPT models for natural language understanding",
-    tech: ["Azure", "OpenAI", "Node.js", "React"],
-    github: "https://github.com/akshaydeshpande/azure-ai-chatbot",
+    description: "Intelligent chatbot using Azure Cognitive Services and OpenAI GPT models for natural language understanding for our company's sharepoint site as a knowledge source",
+    tech: ["Azure Services", "OpenAI", "ASP.NET Core"],
+    github: "",
     image: "/project1.jpg"
   },
   {
@@ -92,7 +113,7 @@ export const portfolioContext = `
 I am Akshay Deshpande, a Senior Software Engineer with expertise in AI systems, cloud architecture, and full-stack development.
 
 PROFESSIONAL SUMMARY:
-- Currently working as a Senior Software Engineer at Tech Corp since 2020
+- Currently working as a Senior Software Engineer at CSC Global since 2021
 - Specialized in building AI-powered applications using OpenAI and Azure Cognitive Services
 - Expert in cloud architecture with focus on Azure platform
 - Full-stack developer proficient in React, Angular, Node.js, and .NET
@@ -103,7 +124,7 @@ TECHNICAL EXPERTISE:
 - Frontend: React, Angular, TypeScript, modern CSS frameworks
 - Backend: Node.js, .NET Core, REST APIs, GraphQL
 - Database: MongoDB, SQL databases
-- DevOps: Docker, CI/CD pipelines
+- DevOps: Docker,Kubernetes, CI/CD pipelines
 
 KEY PROJECTS:
 1. Azure AI Chatbot: Built an intelligent chatbot using Azure Cognitive Services and OpenAI GPT models for natural language understanding
@@ -112,17 +133,19 @@ KEY PROJECTS:
 4. AI Audiobook Generator: Built a system to transform text documents into natural-sounding audiobooks using AI voice synthesis
 
 CAREER JOURNEY:
-- 2020-Present: Senior Software Engineer at Tech Corp - Leading AI systems development and cloud architecture initiatives
-- 2018-2020: Full Stack Engineer at Innovation Labs - Developed scalable web applications using modern tech stack
-- 2016-2018: Software Developer at StartUp Inc - Built and maintained enterprise applications
+- 2021–Present: Senior Software Engineer at CSC Global – Leading AI systems development, agent orchestration, and cloud-native architecture on Azure
+- 2018–2021: Senior Software Engineer at Accenture – Built scalable web applications, led a team of developers, and implemented automation testing frameworks
+- 2017–2018: Senior Software Engineer at eClerx Services – Developed and maintained enterprise applications using ASP.NET, SQL, and AngularJS
+- 2016–2017: Software Developer at GEP Worldwide – Built enterprise solutions and gained experience with Azure cloud services and full-stack technologies
+- 2014–2016: Software Developer at National Bulk Handling Corporation Pvt Ltd – Started career building enterprise applications using ASP.NET, MVC, and SQL
 
 APPROACH & PHILOSOPHY:
 I'm passionate about building innovative solutions that leverage cutting-edge AI technology. I focus on creating scalable, production-ready applications that solve real-world problems. My experience spans from developing AI-powered chatbots to designing cloud-native architectures.
 
 CONTACT:
-- Email: akshay@example.com
-- GitHub: https://github.com/akshaydeshpande
-- LinkedIn: https://linkedin.com/in/akshaydeshpande
+- Email: deakshay50@example.com
+- GitHub: https://github.com/AkshayDeshpande1992
+- LinkedIn: https://linkedin.com/in/akshay-deshpande-a3a999b5
 
 Feel free to ask me about my projects, technical skills, experience, or how I can help with your next project!
 `;
