@@ -263,10 +263,8 @@ const ChatBot = () => {
                     <motion.button
                       onClick={toggleListening}
                       className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-colors ${
-                        isListening ? 'bg-red-500' : 'hover:bg-white/10'
+                        isListening ? 'hover:bg-white/10' : 'bg-red-500'
                       }`}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
                     >
                       {isListening ? (
                         <MicOff size={18} className="text-white" />
