@@ -263,7 +263,7 @@ const ChatBot = () => {
                     <motion.button
                       onClick={toggleListening}
                       className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-lg transition-colors ${
-                        isListening ? 'hover:bg-white/10' : 'bg-red-500'
+                        isListening ? 'bg-red-500' : 'hover:bg-white/10'
                       }`}
                     >
                       {isListening ? (
