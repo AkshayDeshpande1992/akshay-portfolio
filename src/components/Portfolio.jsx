@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedBackground from './AnimatedBackground';
 import DesktopIcons from './DesktopIcons';
@@ -22,6 +22,11 @@ const Portfolio = () => {
   const [zoomed, setZoomed] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
 
+  // Ref to track the timeout that sets showIcons after zoom
+  const showIconsTimeoutRef = useRef(null);
+  // Ref to track the scrolling reset timeout
+  const scrollingResetTimeoutRef = useRef(null);
+
   // Simulate loading
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,6 +43,20 @@ const Portfolio = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Cleanup pending timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (showIconsTimeoutRef.current) {
+        clearTimeout(showIconsTimeoutRef.current);
+        showIconsTimeoutRef.current = null;
+      }
+      if (scrollingResetTimeoutRef.current) {
+        clearTimeout(scrollingResetTimeoutRef.current);
+        scrollingResetTimeoutRef.current = null;
+      }
+    };
+  }, []);
+
   // Handle scroll for zoom effect
   useEffect(() => {
     const handleScroll = () => {
@@ -48,15 +67,32 @@ const Portfolio = () => {
 
       // If scrolled back up, reset to hero
       if (scrollY < 100 && zoomed && !isScrolling) {
+        // Clear any pending showIcons timeout so icons don't reappear
+        if (showIconsTimeoutRef.current) {
+          clearTimeout(showIconsTimeoutRef.current);
+          showIconsTimeoutRef.current = null;
+        }
+
         setZoomed(false);
         setShowIcons(false);
         setActiveApp(null);
       }
 
-      // Trigger zoom when scroll reaches threshold
-      if (progress > 0.5 && !zoomed) {
+      // Trigger zoom when scroll reaches threshold, but don't trigger while programmatically scrolling
+      if (progress > 0.5 && !zoomed && !isScrolling) {
         setZoomed(true);
-        setTimeout(() => setShowIcons(true), 1000);
+
+        // Clear existing timeout if any
+        if (showIconsTimeoutRef.current) {
+          clearTimeout(showIconsTimeoutRef.current);
+          showIconsTimeoutRef.current = null;
+        }
+
+        // Delay showing icons to allow zoom animation to finish
+        showIconsTimeoutRef.current = setTimeout(() => {
+          setShowIcons(true);
+          showIconsTimeoutRef.current = null;
+        }, 1000);
       }
     };
 
@@ -69,19 +105,28 @@ const Portfolio = () => {
     const handleKeyDown = (e) => {
       // Only handle Escape if we're zoomed into the desk screen (not in an app)
       if (e.key === 'Escape' && zoomed && !activeApp) {
+        // Clear any pending showIcons timeout so icons don't reappear
+        if (showIconsTimeoutRef.current) {
+          clearTimeout(showIconsTimeoutRef.current);
+          showIconsTimeoutRef.current = null;
+        }
+
         // Reset state to match scroll-up behavior
         setZoomed(false);
         setShowIcons(false);
         setActiveApp(null);
-        
+
         // Set scrolling flag to prevent scroll handler from re-triggering zoom
         setIsScrolling(true);
-        
+
         // Smooth scroll back to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
+
         // Reset scrolling flag after scroll animation completes
-        setTimeout(() => setIsScrolling(false), 1000);
+        if (scrollingResetTimeoutRef.current) {
+          clearTimeout(scrollingResetTimeoutRef.current);
+        }
+        scrollingResetTimeoutRef.current = setTimeout(() => setIsScrolling(false), 1200);
       }
     };
 
