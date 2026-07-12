@@ -58,25 +58,16 @@ const AppWindow = ({ title, children, onClose, show }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dragging]);
 
-  // Handle ESC key to close window
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === 'Escape' && show) {
-        onClose();
-      }
-    };
-
     if (show) {
-      document.addEventListener('keydown', handleEscape);
       // Prevent body scroll when window is open
       document.body.style.overflow = 'hidden';
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [show, onClose]);
+  }, [show]);
 
   if (!show) return null;
 
