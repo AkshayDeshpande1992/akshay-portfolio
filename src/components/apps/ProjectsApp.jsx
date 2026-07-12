@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { projects } from '../../mock';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, X } from 'lucide-react';
+import ApiUsageCanvas from '../ApiUsageCanvas';
 
 const ProjectsApp = () => {
+  const [expandedProject, setExpandedProject] = useState(null);
+
   return (
     <div className="space-y-6">
       <div>
@@ -40,27 +43,66 @@ const ProjectsApp = () => {
             </div>
 
             <div className="flex gap-3">
-              <motion.a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:border-cyan-400/50 transition-all"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Github size={16} />
-                <span>Code</span>
-              </motion.a>
-              <motion.button
-                className="flex items-center gap-2 px-4 py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-lg text-sm text-cyan-400 hover:bg-cyan-400/20 transition-all"
-                whileHover={{ scale: 1.05 }}
-              >
-                <ExternalLink size={16} />
-                <span>Demo</span>
-              </motion.button>
+              {project.github && (
+                <motion.a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm hover:border-cyan-400/50 transition-all"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Github size={16} />
+                  <span>Code</span>
+                </motion.a>
+              )}
+              {project.showApiCanvas && (
+                <motion.button
+                  onClick={() => setExpandedProject(project.id)}
+                  className="flex items-center gap-2 px-4 py-2 bg-cyan-400/10 border border-cyan-400/30 rounded-lg text-sm text-cyan-400 hover:bg-cyan-400/20 transition-all"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <ExternalLink size={16} />
+                  <span>API</span>
+                </motion.button>
+              )}
             </div>
           </motion.div>
         ))}
       </div>
+
+      {/* API Canvas Modal */}
+      {expandedProject && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          onClick={() => setExpandedProject(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="glass rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="sticky top-0 flex items-center justify-between p-6 border-b border-cyan-400/20 bg-gray-900/50 backdrop-blur">
+              <h2 className="text-2xl font-bold neon-cyan">API Usage Guide</h2>
+              <motion.button
+                onClick={() => setExpandedProject(null)}
+                className="p-2 hover:bg-cyan-400/10 rounded-lg transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <X size={24} className="text-cyan-400" />
+              </motion.button>
+            </div>
+            <div className="p-6">
+              <ApiUsageCanvas />
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 };
