@@ -108,10 +108,12 @@ const Portfolio = () => {
         if (activeApp) {
           e.preventDefault();
           handleCloseApp();
-          return;
+          return; // Exit here - don't scroll back
         }
 
         // If no popup is open, scroll back to landing screen
+        e.preventDefault();
+        
         // Clear any pending showIcons timeout so icons don't reappear
         if (showIconsTimeoutRef.current) {
           clearTimeout(showIconsTimeoutRef.current);
