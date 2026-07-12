@@ -20,6 +20,7 @@ const Portfolio = () => {
   const [showIcons, setShowIcons] = useState(false);
   const [activeApp, setActiveApp] = useState(null);
   const [zoomed, setZoomed] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
 
   // Simulate loading
   useEffect(() => {
@@ -46,7 +47,7 @@ const Portfolio = () => {
       setScrollProgress(progress);
 
       // If scrolled back up, reset to hero
-      if (scrollY < 100 && zoomed) {
+      if (scrollY < 100 && zoomed && !isScrolling) {
         setZoomed(false);
         setShowIcons(false);
         setActiveApp(null);
@@ -61,7 +62,7 @@ const Portfolio = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [zoomed]);
+  }, [zoomed, isScrolling]);
 
   // Handle Escape key to return to landing screen
   useEffect(() => {
@@ -72,8 +73,15 @@ const Portfolio = () => {
         setZoomed(false);
         setShowIcons(false);
         setActiveApp(null);
+        
+        // Set scrolling flag to prevent scroll handler from re-triggering zoom
+        setIsScrolling(true);
+        
         // Smooth scroll back to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Reset scrolling flag after scroll animation completes
+        setTimeout(() => setIsScrolling(false), 1000);
       }
     };
 
