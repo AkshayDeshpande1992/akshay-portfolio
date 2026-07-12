@@ -100,11 +100,18 @@ const Portfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [zoomed, isScrolling]);
 
-  // Handle Escape key to return to landing screen
+  // Handle Escape key to close popup or return to landing screen
   useEffect(() => {
     const handleKeyDown = (e) => {
-      // Only handle Escape if we're zoomed into the desk screen (not in an app)
-      if (e.key === 'Escape' && zoomed && !activeApp) {
+      if (e.key === 'Escape' && zoomed) {
+        // If a popup is open, just close it
+        if (activeApp) {
+          e.preventDefault();
+          handleCloseApp();
+          return;
+        }
+
+        // If no popup is open, scroll back to landing screen
         // Clear any pending showIcons timeout so icons don't reappear
         if (showIconsTimeoutRef.current) {
           clearTimeout(showIconsTimeoutRef.current);
