@@ -76,10 +76,10 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Speech-to-Text Pipeline",
-    description: "Real-time speech transcription pipeline with high accuracy using Azure Speech Services",
-    tech: ["Azure", "Python", "Docker"],
-    github: "https://github.com/akshaydeshpande/speech-pipeline",
+    title: "Multi Agent Orchestrator API",
+    description: "The application is a multi-agent orchestrator designed to solve complex tasks by leveraging a team of specialized AI agents. It includes agents like the PlannerAgent, ClarifierAgent, and ValidatorAgent, each with distinct roles such as planning, clarifying user requests, and validating outputs. The app integrates with external services like Groq and Gemini for LLM-based processing and uses tools like WebSearchTool and CalculatorTool to enhance agent capabilities. Tasks are routed dynamically via the TaskRouter, and progress is communicated through SignalR's ProgressHub. The app is designed to handle user requests, decompose them into subtasks, and produce detailed, actionable outputs. https://multi-agent-orchestrator-u7db.onrender.com/api/agent/run",
+    tech: [".NET 8", "Groq and Gemini APIs", "Docker", "SignalR", "Render"],
+    github: "https://github.com/AkshayDeshpande1992/Multi-agent-orchestrator",
     image: "/project2.jpg"
   },
   {
