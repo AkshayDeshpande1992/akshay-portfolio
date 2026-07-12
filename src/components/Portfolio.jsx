@@ -63,6 +63,24 @@ const Portfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [zoomed]);
 
+  // Handle Escape key to return to landing screen
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Only handle Escape if we're zoomed into the desk screen (not in an app)
+      if (e.key === 'Escape' && zoomed && !activeApp) {
+        // Reset state to match scroll-up behavior
+        setZoomed(false);
+        setShowIcons(false);
+        setActiveApp(null);
+        // Smooth scroll back to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [zoomed, activeApp]);
+
   const handleIconClick = (appId) => {
     setActiveApp(appId);
   };
