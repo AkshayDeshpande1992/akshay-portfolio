@@ -33,7 +33,7 @@ export const experience = [
     year: "2021 - Present",
     title: "Senior Software Engineer",
     company: "CSC Global",
-    description: "Leading development of AI-driven systems using Azure-hosted GPT models, MCP servers, and agent orchestration. Architecting scalable solutions with RAG, Docker, Kubernetes, and ASP.NET Core"
+    description: "Leading development of AI-driven systems using Azure-hosted GPT models, MCP servers, and agent orchestration. Architecting scalable solutions with RAG, Docker, Kubernetes, and ASP.NET Core."
   },
   {
     id: 2,
@@ -72,15 +72,16 @@ export const projects = [
     description: "Intelligent chatbot using Azure Cognitive Services and OpenAI GPT models for natural language understanding for our company's sharepoint site as a knowledge source",
     tech: ["Azure Services", "OpenAI", "ASP.NET Core"],
     github: "",
-    image: "/project1.jpg"
+    image: ""
   },
   {
     id: 2,
     title: "Multi Agent Orchestrator API",
-    description: "The application is a multi-agent orchestrator designed to solve complex tasks by leveraging a team of specialized AI agents. It includes agents like the PlannerAgent, ClarifierAgent, and ValidatorAgent, each with distinct roles such as planning, clarifying user requests, and validating outputs. The app integrates with external services like Groq and Gemini for LLM-based processing and uses tools like WebSearchTool and CalculatorTool to enhance agent capabilities. Tasks are routed dynamically via the TaskRouter, and progress is communicated through SignalR's ProgressHub. The app is designed to handle user requests, decompose them into subtasks, and produce detailed, actionable outputs. https://multi-agent-orchestrator-u7db.onrender.com/api/agent/run",
+    description: "The application is a multi-agent orchestrator designed to solve complex tasks by leveraging a team of specialized AI agents. It includes agents like the PlannerAgent, ClarifierAgent, ResearcherAgent and more for intelligent task completion.",
     tech: [".NET 8", "Groq and Gemini APIs", "Docker", "SignalR", "Render"],
     github: "https://github.com/AkshayDeshpande1992/Multi-agent-orchestrator",
-    image: "/project2.jpg"
+    image: "/project2.jpg",
+    showApiCanvas: true
   },
   {
     id: 3,
@@ -140,7 +141,7 @@ CAREER JOURNEY:
 - 2014–2016: Software Developer at National Bulk Handling Corporation Pvt Ltd – Started career building enterprise applications using ASP.NET, MVC, and SQL
 
 APPROACH & PHILOSOPHY:
-I'm passionate about building innovative solutions that leverage cutting-edge AI technology. I focus on creating scalable, production-ready applications that solve real-world problems. My experience spans from developing AI-powered chatbots to designing cloud-native architectures.
+I'm passionate about building innovative solutions that leverage cutting-edge AI technology. I focus on creating scalable, production-ready applications that solve real-world problems.
 
 CONTACT:
 - Email: deakshay50@example.com
