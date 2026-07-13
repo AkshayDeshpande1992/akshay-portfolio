@@ -235,7 +235,7 @@ const Portfolio = () => {
                   {personalInfo.name}
                 </motion.h1>
                 <motion.p
-                  className="text-2xl text-gray-200 mb-3 md:text-2xl sm:text-lg"
+                  className="text-2xl text-gray-200 mb-3 md:text-xl sm:text-lg"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
