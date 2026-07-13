@@ -21,11 +21,23 @@ const Portfolio = () => {
   const [activeApp, setActiveApp] = useState(null);
   const [zoomed, setZoomed] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Ref to track the timeout that sets showIcons after zoom
   const showIconsTimeoutRef = useRef(null);
   // Ref to track the scrolling reset timeout
   const scrollingResetTimeoutRef = useRef(null);
+
+  // Detect mobile device on mount and on resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Simulate loading
   useEffect(() => {
@@ -282,6 +294,7 @@ const Portfolio = () => {
           title={getAppTitle()}
           show={activeApp !== null}
           onClose={handleCloseApp}
+          isMobile={isMobile}
         >
           {renderApp()}
         </AppWindow>
