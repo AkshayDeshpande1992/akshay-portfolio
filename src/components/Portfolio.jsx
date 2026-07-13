@@ -208,20 +208,20 @@ const Portfolio = () => {
         <AnimatePresence>
           {!isLoading && !zoomed && (
             <motion.div
-              className="fixed inset-0 flex flex-col items-center justify-center"
+              className="fixed inset-0 flex flex-col items-center justify-center px-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, scale: 2 }}
               transition={{ duration: 1 }}
             >
               <motion.div
-                className="text-center"
+                className="text-center w-full"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
               >
                 <motion.h1
-                  className="text-7xl font-bold mb-6 neon-cyan"
+                  className="hero-title font-bold mb-6 neon-cyan"
                   style={{ fontFamily: 'Poppins, sans-serif' }}
                   animate={{
                     textShadow: [
@@ -235,7 +235,7 @@ const Portfolio = () => {
                   {personalInfo.name}
                 </motion.h1>
                 <motion.p
-                  className="text-2xl text-gray-200 mb-3"
+                  className="text-2xl text-gray-200 mb-3 md:text-2xl sm:text-lg"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
@@ -258,12 +258,12 @@ const Portfolio = () => {
                   animate={{ scale: 1, opacity: 1 }}
                   transition={{ delay: 1, duration: 0.8 }}
                 >
-                  <div className="w-96 h-56 mx-auto glass rounded-lg p-4 relative overflow-hidden">
+                  <div className="w-96 h-56 mx-auto glass rounded-lg p-4 relative overflow-hidden md:w-80 md:h-48 sm:w-64 sm:h-40">
                     {/* Screen glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-purple-400/20 rounded-lg" />
                     
                     {/* Code lines animation */}
-                    <div className="relative z-10 space-y-2 code-text text-md font-mono">
+                    <div className="relative z-10 space-y-2 code-text text-md font-mono md:text-sm sm:text-xs">
                       {['const developer = {', '  name: "Akshay",', '  role: "Senior Engineer",', '  passion: "Building amazing things"', '};'].map((line, i) => (
                         <motion.div
                           key={i}
