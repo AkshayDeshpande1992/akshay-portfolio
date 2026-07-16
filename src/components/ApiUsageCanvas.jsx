@@ -8,15 +8,13 @@ const ApiUsageCanvas = () => {
   const apiExample = `POST https://multi-agent-orchestrator-u7db.onrender.com/api/agent/run
 Content-Type: "application/json"
 
-Body: {
-  "userMessage": "Create a plan to learn AI, considering latest advancements in AI"
-}`;
+Body: "Create a plan to learn AI, considering latest advancements in AI"
+`;
 
   const curlExample = `curl -X POST https://multi-agent-orchestrator-u7db.onrender.com/api/agent/run \\
   -H "Content-Type: application/json" \\
-  -d '{
-    "userMessage": "Create a plan to learn AI, considering latest advancements in AI"
-  }'`;
+  -d '"Create a plan to learn AI, considering latest advancements in AI"
+  '`;
 
   const jsExample = `const response = await fetch(
   'https://multi-agent-orchestrator-u7db.onrender.com/api/agent/run',
@@ -25,9 +23,7 @@ Body: {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      userMessage: 'Create a plan to learn AI, considering latest advancements in AI'
-    })
+    body:  'Create a plan to learn AI, considering latest advancements in AI'
   }
 );
 
