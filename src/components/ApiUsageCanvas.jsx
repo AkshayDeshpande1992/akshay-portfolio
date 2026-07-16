@@ -55,13 +55,6 @@ console.log(data);`;
 
   return (
     <div className="space-y-6 p-2">
-      <div>
-        <h3 className="text-2xl font-bold mb-2 neon-cyan">API Usage</h3>
-        <p className="text-gray-400 text-sm">
-          Multi-Agent Orchestrator REST API Endpoint
-        </p>
-      </div>
-
       {/* Tabs */}
       <div className="flex gap-2 border-b border-cyan-400/20">
         {['rest', 'curl', 'javascript'].map((tab) => (
