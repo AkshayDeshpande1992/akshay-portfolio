@@ -104,6 +104,7 @@ const ProjectsApp = () => {
     <ApiUsageCanvas />
   </div>
 </motion.div>
+        </motion.div>
       )}
     </div>
   );
