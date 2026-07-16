@@ -80,28 +80,30 @@ const ProjectsApp = () => {
           onClick={() => setExpandedProject(null)}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="glass rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="sticky top-0 flex items-center justify-between p-6 border-b border-cyan-400/20 bg-gray-900/50 backdrop-blur">
-              <h2 className="text-2xl font-bold neon-cyan">API Usage Guide</h2>
-              <motion.button
-                onClick={() => setExpandedProject(null)}
-                className="p-2 hover:bg-cyan-400/10 rounded-lg transition-all"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <X size={24} className="text-cyan-400" />
-              </motion.button>
-            </div>
-            <div className="p-6">
-              <ApiUsageCanvas />
-            </div>
-          </motion.div>
-        </motion.div>
+  initial={{ scale: 0.9, opacity: 0 }}
+  animate={{ scale: 1, opacity: 1 }}
+  exit={{ scale: 0.9, opacity: 0 }}
+  className="glass rounded-xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+  onClick={(e) => e.stopPropagation()}
+>
+            <div className="flex-shrink-0 flex items-center justify-between p-6 border-b border-cyan-400/20 bg-gray-900/95 backdrop-blur-xl">
+    <h2 className="text-2xl font-bold neon-cyan">
+      API Usage Guide
+    </h2>
+               <motion.button
+      onClick={() => setExpandedProject(null)}
+      className="p-2 hover:bg-cyan-400/10 rounded-lg transition-all"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <X size={24} className="text-cyan-400" />
+    </motion.button>
+  </div>
+           
+             <div className="flex-1 overflow-y-auto p-6">
+    <ApiUsageCanvas />
+  </div>
+</motion.div>
       )}
     </div>
   );
