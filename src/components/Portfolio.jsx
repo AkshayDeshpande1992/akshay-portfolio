@@ -31,7 +31,7 @@ const Portfolio = () => {
   // Detect mobile device on mount and on resize
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+        setIsMobile(window.matchMedia('(max-width: 768px)').matches);
     };
 
     checkMobile();
