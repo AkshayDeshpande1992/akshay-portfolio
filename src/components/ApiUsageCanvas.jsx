@@ -116,6 +116,31 @@ const ApiUsageCanvas = () => {
     return mdIndicators.some((re) => re.test(text));
   };
 
+  // Custom components for ReactMarkdown to ensure responsiveness and wrapping
+  const markdownComponents = {
+    table: ({ node, ...props }) => (
+      <div className="overflow-auto max-w-full my-2">
+        <table className="w-full table-fixed text-sm" {...props} />
+      </div>
+    ),
+    thead: ({ node, ...props }) => <thead className="bg-gray-900/50" {...props} />,
+    th: ({ node, ...props }) => (
+      <th {...props} className={(props.className || '') + ' text-left px-2 py-1'} />
+    ),
+    td: ({ node, ...props }) => (
+      <td {...props} className={(props.className || '') + ' align-top px-2 py-1 break-words'} />
+    ),
+    pre: ({ node, ...props }) => (
+      <pre className="whitespace-pre-wrap break-words text-xs p-2 bg-gray-900/20 rounded" {...props} />
+    ),
+    code: ({ node, inline, className, children, ...props }) => {
+      if (inline) {
+        return <code className={(className || '') + ' bg-white/5 px-1 rounded text-xs'} {...props}>{children}</code>;
+      }
+      return <code className={(className || '') + ' block p-2 rounded text-xs'} {...props}>{children}</code>;
+    }
+  };
+
   const renderResponse = () => {
     if (loading) {
       return (
@@ -139,8 +164,14 @@ const ApiUsageCanvas = () => {
 
       if (isMd && renderedView) {
         return (
-          <div className="prose max-w-full text-sm markdown-body">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>{text}</ReactMarkdown>
+          <div className="max-w-full text-sm markdown-body">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeHighlight]}
+              components={markdownComponents}
+            >
+              {text}
+            </ReactMarkdown>
           </div>
         );
       }
