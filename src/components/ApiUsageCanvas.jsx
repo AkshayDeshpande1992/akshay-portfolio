@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Copy, Check, Play, Loader, AlertCircle } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import 'highlight.js/styles/github-dark.css';
 
 const ApiUsageCanvas = () => {
   const [copied, setCopied] = useState(false);
@@ -11,33 +15,15 @@ const ApiUsageCanvas = () => {
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
+  const [renderedView, setRenderedView] = useState(true);
 
-  const apiUrl = 'https://multi-agent-orchestrator-u7db.onrender.com/api/agent/run';
+  const apiUrl = process.env.REACT_APP_API_URL || 'https://multi-agent-orchestrator-u7db.onrender.com/api/agent/run';
 
-  const apiExample = `POST ${apiUrl}
-Content-Type: "application/json"
+  const apiExample = `POST ${apiUrl}\nContent-Type: \"application/json\"\n\nBody: \"Create a plan to learn AI, considering latest advancements in AI\"\n`;
 
-Body: "Create a plan to learn AI, considering latest advancements in AI"
-`;
+  const curlExample = `curl -X POST ${apiUrl} \\\n  -H \"Content-Type: application/json\" \\\n  -d '\"Create a plan to learn AI, considering latest advancements in AI\"'\n`;
 
-  const curlExample = `curl -X POST ${apiUrl} \\
-  -H "Content-Type: application/json" \\
-  -d '"Create a plan to learn AI, considering latest advancements in AI"'
-`;
-
-  const jsExample = `const response = await fetch(
-  '${apiUrl}',
-  {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify('Create a plan to learn AI, considering latest advancements in AI')
-  }
-);
-
-const data = await response.json();
-console.log(data);`;
+  const jsExample = `const response = await fetch(\n  '${apiUrl}',\n  {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json'\n    },\n    body: JSON.stringify('Create a plan to learn AI, considering latest advancements in AI')\n  }\n);\n\nconst data = await response.json();\nconsole.log(data);`;
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
@@ -93,7 +79,44 @@ console.log(data);`;
     }
   };
 
-  const renderResponsePre = () => {
+  const extractStringFromResponse = (resp) => {
+    if (!resp) return '';
+    if (typeof resp === 'string') return resp;
+    if (typeof resp === 'object') {
+      if (typeof resp.result === 'string') return resp.result;
+      if (typeof resp.content === 'string') return resp.content;
+      // Some APIs return { choices:[{message:{content: '...'}}] }
+      try {
+        if (Array.isArray(resp.choices) && resp.choices.length) {
+          const first = resp.choices[0];
+          if (first && first.message && typeof first.message.content === 'string') return first.message.content;
+          if (first && typeof first.text === 'string') return first.text;
+        }
+      } catch (e) {
+        // ignore
+      }
+      // fallback to pretty JSON
+      return JSON.stringify(resp, null, 2);
+    }
+    return String(resp);
+  };
+
+  const looksLikeMarkdown = (text) => {
+    if (!text) return false;
+    const mdIndicators = [
+      /^#{1,6}\s+/m,
+      /^>\s+/m,
+      /```/,
+      /\[.+\]\(.+\)/,
+      /^-\s+/m,
+      /^\*\s+/m,
+      /\n-{3,}\n/,
+      /\*\*.+\*\*/
+    ];
+    return mdIndicators.some((re) => re.test(text));
+  };
+
+  const renderResponse = () => {
     if (loading) {
       return (
         <div className="flex items-center gap-2 text-sm text-gray-300">
@@ -111,9 +134,21 @@ console.log(data);`;
     }
 
     if (response) {
+      const text = extractStringFromResponse(response);
+      const isMd = looksLikeMarkdown(text);
+
+      if (isMd && renderedView) {
+        return (
+          <div className="prose max-w-full text-sm markdown-body">
+            <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>{text}</ReactMarkdown>
+          </div>
+        );
+      }
+
+      // Raw view (either not markdown or user chose raw)
       return (
         <pre className="text-green-300 whitespace-pre-wrap break-words text-xs">
-          {typeof response === 'string' ? response : JSON.stringify(response, null, 2)}
+          {text}
         </pre>
       );
     }
@@ -232,13 +267,25 @@ console.log(data);`;
       <div>
         <h4 className="text-sm font-bold text-gray-300 mb-2">Response</h4>
         <div className="bg-gray-950/50 border border-cyan-400/20 rounded-lg p-4 font-mono text-sm">
-          {renderResponsePre()}
+          <div className="flex items-center justify-between mb-3">
+            <div className="text-xs text-gray-400">Output</div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setRenderedView((v) => !v)}
+                className="text-xs px-2 py-1 border rounded-md bg-white/5 border-white/10 hover:border-cyan-400/50"
+              >
+                {renderedView ? 'Rendered' : 'Raw'}
+              </button>
+            </div>
+          </div>
+
+          {renderResponse()}
 
           <div className="mt-3 flex gap-2">
             <motion.button
               onClick={() => {
-                const text = error ? JSON.stringify(error, null, 2) : (response ? (typeof response === 'string' ? response : JSON.stringify(response, null, 2)) : '');
-                if (text) copyToClipboard(text);
+                const fullText = error ? JSON.stringify(error, null, 2) : (response ? extractStringFromResponse(response) : '');
+                if (fullText) copyToClipboard(fullText);
               }}
               className="flex items-center gap-2 px-3 py-1 bg-cyan-400/10 border border-cyan-400/20 rounded-lg text-xs text-cyan-400 hover:bg-cyan-400/20 transition-all disabled:opacity-50"
               whileHover={{ scale: 1.02 }}
