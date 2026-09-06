@@ -113,3 +113,43 @@ code {
         border-bottom-color: inherit;
     }
 }
+
+/* Markdown rendering fixes */
+.markdown-body {
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.45;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.markdown-body table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.markdown-body th,
+.markdown-body td {
+  word-break: break-word;
+  white-space: normal;
+  padding: 0.35rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.markdown-body pre {
+  overflow: auto;
+  padding: 0.5rem;
+  border-radius: 6px;
+  white-space: pre; /* keep code formatting */
+}
+
+.markdown-body code {
+  word-break: break-word;
+}
